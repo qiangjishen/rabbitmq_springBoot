@@ -11,6 +11,13 @@ import java.io.IOException;
 @Component
 @Slf4j
 public class WorkQueueConsume2 {
+    /**
+     * 注意：提交模式为： 手动提交
+     * @param message
+     * @param channel
+     * @throws InterruptedException
+     * @throws IOException
+     */
     @RabbitListener(queues = "work.queue", concurrency = "1", ackMode = "MANUAL")
     public void process(Message message, Channel channel) throws InterruptedException, IOException {
         Thread.sleep(5000);
