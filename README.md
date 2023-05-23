@@ -12,4 +12,5 @@
 
 ### 解决方案：
 #### 1.方案一:消息信息落库,对消息状态进行打标(常见方案)
-![img.png](img.png)
+![image](https://github.com/qiangjishen/rabbitmq_springBoot/assets/4744404/04729baa-9701-456f-8795-d7e23a1b2813)
+
