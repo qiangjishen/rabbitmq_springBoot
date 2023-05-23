@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    password: thdc
+    url: jdbc:mysql://47.104.26.21:29005/ds_platform?serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&allowMultiQueries=true
+    username: thdc
+  flyway:
+    enabled: false
+
+  mail:
+    host: smtp.163.com
+    port: 25
+    username: qiangjishen@163.com
+    password: TADSRVOHIUOVHJXT
+    default-encoding: UTF-8
+    forgetPass:
+      title: 密码找回服务
+      nickname: 塞罕坝地面观测数据共享服务平台
+      #url: http://47.104.26.21/sjgxptf-api/system/users/pwdreset/resetPassword
+      url: http://localhost:9529/sjgxptf-ui/#/resetPassword
+      fontPageUrl: passreset.html
+    code:
+      expired: 30   #code过期时间---分钟
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.socketFactory.fallback: false
+
+upload:
+  path: /home/project_sjgxpt/qjs/upload
+  #path: /home/dsp/upload
+  #path: d:\tmp
+  maxSize: 256000  #kb

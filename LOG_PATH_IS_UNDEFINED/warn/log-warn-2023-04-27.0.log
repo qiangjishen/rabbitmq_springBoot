@@ -1,0 +1,10 @@
+2023-04-27 09:09:50.636 [main] WARN  c.a.cloud.nacos.registry.NacosServiceRegistry - No service to register for nacos client...
+2023-04-27 09:27:48.210 [main] WARN  c.a.cloud.nacos.registry.NacosServiceRegistry - No service to register for nacos client...
+2023-04-27 09:38:58.679 [main] WARN  c.a.cloud.nacos.registry.NacosServiceRegistry - No service to register for nacos client...
+2023-04-27 09:39:17.755 [tri-protocol-2147483647-thread-2] WARN  cn.cnnic.dataCenter.controller.CustomerController - list size-->0
+2023-04-27 09:39:43.759 [tri-protocol-2147483647-thread-3] WARN  cn.cnnic.dataCenter.controller.CustomerController - list size-->0
+2023-04-27 09:39:47.902 [tri-protocol-2147483647-thread-4] WARN  cn.cnnic.dataCenter.controller.CustomerController - list size-->0
+2023-04-27 09:39:58.553 [tri-protocol-2147483647-thread-5] WARN  cn.cnnic.dataCenter.controller.CustomerController - list size-->0
+2023-04-27 09:40:03.045 [tri-protocol-2147483647-thread-7] WARN  cn.cnnic.dataCenter.controller.CustomerController - list size-->0
+2023-04-27 09:41:06.284 [tri-protocol-2147483647-thread-8] WARN  cn.cnnic.dataCenter.controller.CustomerController - list size-->0
+2023-04-27 09:41:09.158 [tri-protocol-2147483647-thread-9] WARN  cn.cnnic.dataCenter.controller.CustomerController - list size-->0

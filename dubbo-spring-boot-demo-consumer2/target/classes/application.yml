@@ -1,0 +1,45 @@
+# 配置端口
+server:
+  port: 8083
+
+# 配置Dubbo
+dubbo:
+  application:
+    name: dubbo-springboot-demo-consumer2
+    register-mode: instance
+    logger: log4j
+  protocol:
+    name: tri
+    port: -1
+    prefer-serialization: fastjson2,hessian2
+    serialization: fastjson2
+    accesslog: "true"
+
+  registry:
+    address: zookeeper://192.168.81.133:2181
+  #monitor:
+  #  protocol: registry
+  consumer:
+    check: false
+    loadbalance: roundrobin
+    cluster: failover
+
+  config-center:
+    address: zookeeper://192.168.81.133:2181
+  metadata-report:
+    address: zookeeper://192.168.81.133:2181
+
+rocketmq:
+  name-server: 127.0.0.1:9876 # 访问地址
+  producer:
+    group: Pro_Group # 必须指定group
+    topic1: CNNIC_ROCKETMQ_TOPIC1
+    consumerGroup: transaction-consumer-group
+    send-message-timeout: 3000 # 消息发送超时时长，默认3s
+    retry-times-when-send-failed: 3 # 同步发送消息失败重试次数，默认2
+    retry-times-when-send-async-failed: 3 # 异步发送消息失败重试次数，默认2
+
+logging:
+  level:
+    cn.cnic.dataCenter: DEBUG
+  config: classpath:logback-dev.xml

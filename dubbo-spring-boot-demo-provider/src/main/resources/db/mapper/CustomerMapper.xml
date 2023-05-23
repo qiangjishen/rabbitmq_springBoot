@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.cnnic.dataCenter.dao.CustomerDao">
+
+    <select id="list" resultType="cn.cnnic.dataCenter.dto.CustomerDto">
+        SELECT
+            w.id ,
+            w.real_name realName,
+            w.mobile,
+            w.email,
+            w.company,
+            w.address,
+            w.status,
+            w.create_time createTime,
+            w.update_time   updateTime
+
+        FROM tb_customer w
+
+        <where >
+            <trim prefixOverrides="and" >
+                <if test="id != null" >
+                    and w.id = #{id,jdbcType=BIGINT}
+                </if>
+
+                <if test="email != null" >
+                    and w.email  like '%${email}%'
+
+                </if>
+                <if test="status != null" >
+                    and w.status = #{status}
+                </if>
+
+            </trim>
+        </where>
+
+        ORDER BY w.update_time DESC
+
+    </select>
+
+
+
+
+
+</mapper>

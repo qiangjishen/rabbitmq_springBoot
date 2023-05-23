@@ -1,0 +1,128 @@
+# 配置端口号
+server:
+  port: 8084
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  application:
+    name: 塞罕坝地面观测数据共享服务平台
+  profiles:
+    active: prod
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    filters: stat
+    initialSize: 1
+    maxActive: 20
+    maxOpenPreparedStatements: 20
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 1
+    numTestsPerEvictionRun: -1
+    poolPreparedStatements: true
+    testOnBorrow: true
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 1000
+    type: com.alibaba.druid.pool.DruidDataSource
+    validationQuery: SELECT 1
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  message:
+    encoding: 'UTF-8 '
+  messages:
+    basename: i18n/*
+    encoding: UTF-8
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  servlet:
+    multipart:
+      max-file-size: 1MB  # 默认单个文件的上传大小时1MB
+      max-request-size: 10MB # 默认一次上传的总文件大小为10MB
+
+mybatis:
+  #configuration:
+  #  map-underscore-to-camel-case: true
+  #type-aliases-package: cn.cnic.th.sales.domain
+  mapper-locations: classpath*:/db/mapper/*.xml
+
+
+# 配置Dubbo
+dubbo:
+  application:
+    name: dubbo-springboot-demo-provider
+    register-mode: instance
+    #metadata-type: local # 元数据存放在provider 这边
+    #metadata-service-port: 20889
+    #metadata-service-protocol: dubbo
+    logger: log4j
+  protocol:
+    name: tri
+    port: -1
+    prefer-serialization: fastjson2,hessian2
+    serialization:  fastjson2
+    accesslog: "true"
+  provider:
+    loadbalance: roundrobin
+    cluster: failover
+  registry:
+    id: zk-1 # 如果多个注册中心，@DubboService(registry="nacos-1") 指定服务发现的注册中心
+    address: zookeeper://192.168.81.133:2181
+    parameters: # 扩展参数
+      namespace: 748dcaf9-492c-47f9-a4a8-972cccb5f579 # 指定命名空间
+      register-consumer-url: false # 是否注册消费者
+    use-as-metadata-center: false  # 作为元数据中心
+    use-as-config-center: false  # 作为配置中心,会有服务信息上传到配置中心，似乎默认是true
+  config-center:
+    address: zookeeper://192.168.81.133:2181
+  metadata-report:
+    address: zookeeper://192.168.81.133:2181
+
+  logger:
+    zap-config:
+      level: debug # 日志级别
+      development: true
+      disableCaller: false
+      disableStacktrace: false
+      encoding: "console"
+      # zap encoder 配置
+      encoderConfig:
+        messageKey: "message"
+        levelKey: "level"
+        timeKey: "time"
+        nameKey: "logger"
+        callerKey: "caller"
+        stacktraceKey: "stacktrace"
+        lineEnding: ""
+        levelEncoder: "capitalColor"
+        timeEncoder: "iso8601"
+        durationEncoder: "seconds"
+        callerEncoder: "short"
+        nameEncoder: ""
+      outputPaths:
+        - "stderr"
+      errorOutputPaths:
+        - "stderr"
+    lumberjack-config:
+      # 写日志的文件名称
+      filename: "logs.log"
+      # 每个日志文件长度的最大大小，单位是 MiB。默认 100MiB
+      maxSize: 1
+      # 日志保留的最大天数(只保留最近多少天的日志)
+      maxAge: 3
+      # 只保留最近多少个日志文件，用于控制程序总日志的大小
+      maxBackups: 5
+      # 是否使用本地时间，默认使用 UTC 时间
+      localTime: true
+      # 是否压缩日志文件，压缩方法 gzip
+      compress: false
+
+
+
+logging:
+  level:
+    cn.cnic.dataCenter.dao: DEBUG
