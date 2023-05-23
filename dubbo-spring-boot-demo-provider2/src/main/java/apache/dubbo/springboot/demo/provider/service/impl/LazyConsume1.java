@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class LazyConsume1 {
     /**
      * 惰性队列，主要用于处理数据积压，消息持久化于硬盘，用的时候才加载到内存
+     *
      * @param channel 信道
      * @param message 消息
      * @throws Exception

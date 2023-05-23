@@ -9,7 +9,7 @@ import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
- * Canal + RabbitMQ 监听数据库数据变化
+ * Canal + RabbitMQ 监听数据库数据变化,同步到ES、或者redis或者MQ
  *
  * @author <a href="mailto:qiangjishen@gmail.com">qiangjishen</a>
  * @date 2023/3/4 23:14
