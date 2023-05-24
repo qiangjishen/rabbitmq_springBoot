@@ -49,6 +49,7 @@ Quorum 队列和流取代了持久镜像队列， 仲裁队列针对数据安全
            .build();
     }
 
-[RabbitMQ高可用--Quorum Queue(仲裁队列)的用法]：（https://knife.blog.csdn.net/article/details/126740548）
+[RabbitMQ高可用--Quorum Queue(仲裁队列)的用法](https://knife.blog.csdn.net/article/details/126740548)
+
 
 ## 二、 Exchange交换机类型
