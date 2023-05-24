@@ -14,6 +14,10 @@
         <module>dubbo-spring-boot-demo-consumer</module>
         <module>dubbo-spring-boot-demo-provider2</module>
         <module>dubbo-spring-boot-demo-consumer2</module>
+        <module>spring-boot-kafka-provider</module>
+        <module>spring-boot-kafka-consumer</module>
+        <module>spring-boot-rabbitmq-provider</module>
+        <module>spring-boot-rabbitmq-consumer</module>
     </modules>
 
     <properties>

@@ -8,10 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="dubbo-spring-boot-demo-interface" />
-        <module name="dubbo-spring-boot-demo-consumer" />
+        <module name="spring-boot-kafka-provider" />
         <module name="dubbo-spring-boot-demo-provider" />
-        <module name="dubbo-spring-boot-demo-provider2" />
         <module name="dubbo-spring-boot-demo-consumer2" />
+        <module name="spring-boot-rabbitmq-consumer" />
+        <module name="dubbo-spring-boot-demo-consumer" />
+        <module name="spring-boot-rabbitmq-provider" />
+        <module name="dubbo-spring-boot-demo-provider2" />
+        <module name="spring-boot-kafka-consumer" />
       </profile>
     </annotationProcessing>
   </component>

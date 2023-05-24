@@ -31,8 +31,9 @@ public class RocketMqMessageOrderLyListener implements MessageListenerOrderly, A
     @Value("#{'${rocketmq.consumer.orderly.topics:DEMO_ORDERLY_TOPIC}'.split(',')}")
     private List<String> topicList;
 
-    private Table<String, String, List<MessageHandler>> messageHandlerTable = HashBasedTable.create();
+    //private Table<String, String, List<MessageHandler>> messageHandlerTable = HashBasedTable.create();
 
+    /**
     @PostConstruct
     public void init() {
         Map<String, MessageHandler> consumers = context.getBeansOfType(MessageHandler.class);
@@ -50,6 +51,7 @@ public class RocketMqMessageOrderLyListener implements MessageListenerOrderly, A
                 }
         );
     }
+
 
     private List<MessageHandler> getHandler(String topic, String tag) {
         if (StringUtils.isBlank(topic) || StringUtils.isBlank(tag)) {
@@ -85,7 +87,7 @@ public class RocketMqMessageOrderLyListener implements MessageListenerOrderly, A
         }
 
     }
-
+     **/
     /**
      * 判断是否重复消费
      */
@@ -103,7 +105,7 @@ public class RocketMqMessageOrderLyListener implements MessageListenerOrderly, A
     public ConsumeOrderlyStatus consumeMessage(List<MessageExt> list, ConsumeOrderlyContext consumeOrderlyContext) {
         try {
             for (MessageExt messageExt : list) {
-                handlerMessageExt(messageExt);
+               // handlerMessageExt(messageExt);
                 logger.info("ThreadName:{},messageExt:{}，消费成功", Thread.currentThread().getName(), messageExt);
             }
             return ConsumeOrderlyStatus.SUCCESS;
@@ -112,5 +114,7 @@ public class RocketMqMessageOrderLyListener implements MessageListenerOrderly, A
             return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
         }
     }
+
+
 }
 

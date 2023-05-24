@@ -34,7 +34,7 @@ public class WorkQueueConsume1 {
         long deliveryTag = message.getDelayTimeLevel();
 
         try {
-            int a = 1 / 0;
+            //int a = 1 / 0;
            // System.out.println("1号consumer消费成功  : " + message);
 
             byte[] body = message.getBody();

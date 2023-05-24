@@ -83,11 +83,11 @@ public class RocketMqProductOrderLyComponent {
      * @param dto
      * @param topicName
      * @param tagName
-     * @param delayLevelEnum 延时等级
+     * @param  延时等级
      * @return
      */
-    public boolean sendDelayMessage(Object dto, String topicName, String tagName, String key, DelayLevelEnum delayLevelEnum) {
-        if (Objects.isNull(dto) || Objects.isNull(topicName) || Objects.isNull(tagName) || Objects.isNull(key) || Objects.isNull(delayLevelEnum)) {
+    public boolean sendDelayMessage(Object dto, String topicName, String tagName, String key) {
+        if (Objects.isNull(dto) || Objects.isNull(topicName) || Objects.isNull(tagName) || Objects.isNull(key) ) {
             return false;
         }
 
@@ -97,7 +97,7 @@ public class RocketMqProductOrderLyComponent {
         String body = builderBody(dto);
         try {
             Message message = new Message(topicName, tagName, key, body.getBytes(StandardCharsets.UTF_8));
-            message.setDelayTimeLevel(delayLevelEnum.getDelayLevel());
+           // message.setDelayTimeLevel(delayLevelEnum.getDelayLevel());
 
             SendResult send = defaultMQProducer.send(message, new MessageQueueSelector() {
                 @Override

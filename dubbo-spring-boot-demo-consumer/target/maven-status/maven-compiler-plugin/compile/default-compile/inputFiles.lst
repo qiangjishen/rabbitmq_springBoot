@@ -2,7 +2,9 @@ E:\workspace\20230401\dubbo-spring-boot-demo\dubbo-spring-boot-demo-consumer\src
 E:\workspace\20230401\dubbo-spring-boot-demo\dubbo-spring-boot-demo-consumer\src\main\java\cn\cnnic\dataCenter\ConsumerApplication.java
 E:\workspace\20230401\dubbo-spring-boot-demo\dubbo-spring-boot-demo-consumer\src\main\java\cn\cnnic\dataCenter\service\impl\RocketMQConsumer.java
 E:\workspace\20230401\dubbo-spring-boot-demo\dubbo-spring-boot-demo-consumer\src\main\java\cn\cnnic\dataCenter\controller\CustomerController.java
+E:\workspace\20230401\dubbo-spring-boot-demo\dubbo-spring-boot-demo-consumer\src\main\java\cn\cnnic\dataCenter\service\impl\RocketMQConsumer3.java
 E:\workspace\20230401\dubbo-spring-boot-demo\dubbo-spring-boot-demo-consumer\src\main\java\cn\cnnic\dataCenter\service\impl\SpringTxConsumer.java
 E:\workspace\20230401\dubbo-spring-boot-demo\dubbo-spring-boot-demo-consumer\src\main\java\org\apache\dubbo\springboot\demo\consumer\controller\UserController.java
 E:\workspace\20230401\dubbo-spring-boot-demo\dubbo-spring-boot-demo-consumer\src\main\java\org\example\Main.java
 E:\workspace\20230401\dubbo-spring-boot-demo\dubbo-spring-boot-demo-consumer\src\main\java\cn\cnnic\dataCenter\service\impl\DefaultMQPushConsumer1.java
+E:\workspace\20230401\dubbo-spring-boot-demo\dubbo-spring-boot-demo-consumer\src\main\java\cn\cnnic\dataCenter\service\impl\RocketMqMessageOrderLyListener.java

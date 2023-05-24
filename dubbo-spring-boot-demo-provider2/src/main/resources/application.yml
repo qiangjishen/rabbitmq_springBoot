@@ -96,3 +96,21 @@ spring:
           prefetch: 1
 
 
+
+  kafka:
+    bootstrap-servers: 192.168.81.133:9093
+    producer:
+      # 消息重发的次数。 配置事务的话：如果用户显式地指定了 retries 参数，那么这个参数的值必须大于0
+      #retries: 1
+      #一个批次可以使用的内存大小
+      batch-size: 16384
+      # 设置生产者内存缓冲区的大小。
+      buffer-memory: 33554432
+      # 键的序列化方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # 值的序列化方式
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #配置事务的话：如果用户显式地指定了 acks 参数，那么这个参数的值必须-1 all
+      #acks: all
+      #事务id
+      #transaction-id-prefix: xdclass-tran

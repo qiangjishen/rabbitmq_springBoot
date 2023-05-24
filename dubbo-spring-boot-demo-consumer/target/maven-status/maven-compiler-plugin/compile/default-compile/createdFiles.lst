@@ -1,2 +1,15 @@
+cn\cnnic\dataCenter\service\impl\RocketMQConsumer.class
 cn\cnnic\dataCenter\service\impl\DefaultMQPushConsumer1.class
+org\apache\dubbo\springboot\demo\consumer\controller\UserController.class
+cn\cnnic\dataCenter\service\impl\SpringTxConsumer.class
 cn\cnnic\dataCenter\service\impl\DefaultMQPushConsumer1$1.class
+cn\cnnic\dataCenter\ConsumerApplication.class
+org\apache\dubbo\springboot\demo\consumer\controller\UserController$3.class
+cn\cnnic\dataCenter\service\impl\RocketMQConsumerTag.class
+org\apache\dubbo\springboot\demo\consumer\controller\UserController$1.class
+cn\cnnic\dataCenter\controller\CustomerController.class
+org\example\Main.class
+cn\cnnic\dataCenter\service\impl\RocketMQConsumer3.class
+org\apache\dubbo\springboot\demo\consumer\controller\UserController$2.class
+cn\cnnic\dataCenter\controller\CustomerController$1.class
+cn\cnnic\dataCenter\service\impl\RocketMqMessageOrderLyListener.class
