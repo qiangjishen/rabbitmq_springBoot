@@ -32,4 +32,22 @@
 
 ### 4. dead queue 死信队列
 
+### 5. Quorum Queue 仲裁队列
+quorum 队列是 RabbitMQ 的现代队列类型，基于Raft 共识算法实现持久的、复制的 FIFO 队列。它从 RabbitMQ 3.8.0 开始可用。
+
+Quorum 队列和流取代了持久镜像队列， 仲裁队列针对数据安全是重中之重的一组用例进行了优化。仲裁队列应被视为复制队列类型的默认选项。
+
+与经典镜像队列相比，仲裁队列在行为 和一些限制方面也有重要差异，包括特定于工作负载的队列，例如，当消费者重复重新排队相同的消息时。
+
+某些功能（如毒消息处理）是特定于仲裁队列的。 对于受益于复制和可重复读取的情况，流可能是比仲裁队列更好的选择。
+
+    @Bean
+    public Queue quorumQueue() {
+    return QueueBuilder
+           .durable("quorum.queue") // 持久化
+           .quorum() // 仲裁队列
+           .build();
+    }
+
+
 ## 二、 Exchange交换机类型
