@@ -21,7 +21,9 @@
 
 
     Map<String, Object> args = new HashMap<String, Object>();
+
     args.put("x-queue-mode", "lazy");
+
     channel.queueDeclare("myqueue", false, false, false, args);
 
 
