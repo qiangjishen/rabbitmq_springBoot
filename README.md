@@ -45,13 +45,3 @@ step1 - 对订单数据入BIZ DB订单库,并对因此生成的业务消息入MS
 
 ### 小结
 这两种方案都是可行的，需要根据实际业务来进行选择,方案二也是互联网大厂更为经典和主流的解决方案.但是若对性能要求不是那么高,方案一要更简单.
-
-### rabbitMQ公平分发
-
-这里的配置两个都不能少：
-
-#消息确认机制更改为手动
-spring.rabbitmq.listener.simple.acknowledge-mode=manual  
-
-#预处理模式更改为每次读取1条消息,在消费者未回执确认之前,不在进行下一条消息的投送
-spring.rabbitmq.listener.simple.prefetch=1
