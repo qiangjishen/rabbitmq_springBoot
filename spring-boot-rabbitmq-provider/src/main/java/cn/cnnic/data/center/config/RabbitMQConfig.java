@@ -1,7 +1,7 @@
 package cn.cnnic.data.center.config;
 
 
-import apache.dubbo.springboot.demo.provider.service.impl.ConfirmCallbackService;
+
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
