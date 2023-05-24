@@ -7,6 +7,9 @@ import org.springframework.kafka.support.ProducerListener;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+/**
+ * 发送监听
+ */
 @Component
 public class KafkaSendResultHandler implements ProducerListener<Object, Object> {
 
