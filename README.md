@@ -45,6 +45,7 @@ step1 - 对订单数据入BIZ DB订单库,并对因此生成的业务消息入MS
 这里的配置两个都不能少，否则按照平均分配：
 
 #消息确认机制更改为手动
+
 spring.rabbitmq.listener.simple.acknowledge-mode=manual     
 
 #预处理模式更改为每次读取1条消息,在消费者未回执确认之前,不在进行下一条消息的投送
