@@ -1,0 +1,116 @@
+# 配置端口号
+server:
+  port: 8087
+# 配置Dubbo
+dubbo:
+  application:
+    name: dubbo-springboot-demo-provider
+    register-mode: instance
+    #metadata-type: local # 元数据存放在provider 这边
+    #metadata-service-port: 20889
+    #metadata-service-protocol: dubbo
+  protocol:
+    name: tri
+    port: -1
+    #serialization: protobuf
+  provider:
+    loadbalance: roundrobin
+    cluster: failover
+    retries: 5
+  registries:
+    shanghai:
+      address: nacos://192.168.81.133:8848
+      protocol: zookeeper
+      parameters: # 扩展参数
+        namespace: 748dcaf9-492c-47f9-a4a8-972cccb5f579 # 指定命名空间
+        register-consumer-url: false # 是否注册消费者
+      use-as-metadata-center: false  # 作为元数据中心
+      use-as-config-center: false  # 作为配置中心,会有服务信息上传到配置中心，似乎默认是true
+    beijing:
+      address: nacos://192.168.81.133:8848
+      protocol: zookeeper
+      parameters: # 扩展参数
+        namespace: 748dcaf9-492c-47f9-a4a8-972cccb5f579 # 指定命名空间
+        register-consumer-url: false # 是否注册消费者
+      use-as-metadata-center: false  # 作为元数据中心
+      use-as-config-center: false  # 作为配置中心,会有服务信息上传到配置中心，似乎默认是true
+  #registry:
+  #  id: zk-1 # 如果多个注册中心，@DubboService(registry="nacos-1") 指定服务发现的注册中心
+  #  address: zookeeper://192.168.81.133:2181
+  #  parameters: # 扩展参数
+  #    namespace: 748dcaf9-492c-47f9-a4a8-972cccb5f579 # 指定命名空间
+  #    register-consumer-url: false # 是否注册消费者
+  #  use-as-metadata-center: false  # 作为元数据中心
+  #  use-as-config-center: false  # 作为配置中心,会有服务信息上传到配置中心，似乎默认是true
+  config-center:
+    address: nacos://192.168.81.133:8848
+  metadata-report:
+    address: nacos://192.168.81.133:8848
+
+rocketmq:
+  name-server: 127.0.0.1:9876 # 访问地址
+  autoCreateTopicEnable: true
+  producer:
+    group: Pro_Group # 必须指定group
+    send-message-timeout: 3000 # 消息发送超时时长，默认3s
+    retry-times-when-send-failed: 3 # 同步发送消息失败重试次数，默认2
+    retry-times-when-send-async-failed: 3 # 异步发送消息失败重试次数，默认2
+
+
+spring:
+  rabbitmq:
+    addresses: 192.168.81.135:5672,192.168.81.135:5673
+    username: qjs
+    password: qjs
+    #虚拟host 可以不设置,使用server默认host
+    virtual-host: /
+    template:
+      mandatory: true
+      #配置说明:======================================
+      publisher-confirm-type: simple
+    publisher-returns: true
+    publisher-confirm-type: correlated
+    confirm-type: CORRELATED
+    listener:
+      type: simple
+      simple:
+        acknowledge-mode: manual #消费者端确认模式:none自动确认 manual手动确认 auto通过抛出异常的类型，来做响应的处理
+        concurrency: 1 #当前监听的数量
+        max-concurrency: 1 #最大监听数量
+        prefetch: 1 #消费端限流5 每个消费者未确认的未处理消息的最大数量
+        retry:
+          # 开启消费者失败重试
+          enabled: true
+          # 初始的失败等待时长为1秒
+          initial-interval: 1000
+          # 失败的等待时长倍数，下次等待时长 = multiplier * last-interval
+          multiplier: 3
+          # 最大重试次数
+          max-attempts: 3
+          # true无状态；false有状态。如果业务中包含事务，这里改为false
+          stateless: true
+        default-requeue-rejected: false   #重试次数超过上面的设置之后是否丢弃（false不丢弃时需要写相应代码将该消息加入死信队列）
+
+      direct:
+          acknowledge-mode: manual    #acknowledgeMode设置为手动模式
+          prefetch: 1
+
+
+
+  kafka:
+    bootstrap-servers: 192.168.81.133:9093
+    producer:
+      # 消息重发的次数。 配置事务的话：如果用户显式地指定了 retries 参数，那么这个参数的值必须大于0
+      #retries: 1
+      #一个批次可以使用的内存大小
+      batch-size: 16384
+      # 设置生产者内存缓冲区的大小。
+      buffer-memory: 33554432
+      # 键的序列化方式
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # 值的序列化方式
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      #配置事务的话：如果用户显式地指定了 acks 参数，那么这个参数的值必须-1 all
+      #acks: all
+      #事务id
+      #transaction-id-prefix: xdclass-tran
