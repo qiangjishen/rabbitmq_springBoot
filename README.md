@@ -1,7 +1,7 @@
-# rabbitmq跟rocketmq应用实例
-# MQ实际应用场景
+# 一、rabbitmq跟rocketmq应用实例
+## MQ实际应用场景
 
-## 如何保证Producer的可靠性投递 （如何保证 插入实际业务库的同时向MQ发送消息）
+### 如何保证Producer的可靠性投递 （如何保证 插入实际业务库的同时向MQ发送消息）
 
  1. 保证消息的成功发出
  2. 保证MQ节点的成功接收
@@ -41,15 +41,20 @@ step1 - 对订单数据入BIZ DB订单库,并对因此生成的业务消息入MS
 主要就是为了减少DB操作
 ![image](https://github.com/qiangjishen/rabbitmq_springBoot/assets/4744404/e5392057-f00a-4fff-b8a4-89cf29e25d96)
 
-### RabbitMQ work队列公平模式
-这里的配置两个都不能少，否则按照平均分配：
 
-#消息确认机制更改为手动
-
-spring.rabbitmq.listener.simple.acknowledge-mode=manual     
-
-#预处理模式更改为每次读取1条消息,在消费者未回执确认之前,不在进行下一条消息的投送
-spring.rabbitmq.listener.simple.prefetch=1
 
 ### 小结
 这两种方案都是可行的，需要根据实际业务来进行选择,方案二也是互联网大厂更为经典和主流的解决方案.但是若对性能要求不是那么高,方案一要更简单.
+
+# 二、几种MQ的对比
+
+### 1. RabbitMQ 
+1.优点：
+2.缺点：rabbitMQ对于严格的消息顺序支持不是很好
+
+### 2. kafka
+优点： kafka擅长实时数据处理和大规模的数据流处理。Kafka 的主要特点是高吞吐量、低延迟和可扩展性，适用于处理海量数据，如大型日志、事件流和用户行为跟踪数据等。Kafka 还可以支持多种消费者和分区，能够更好地处理并发请求和负载均衡。
+
+缺点： kafka实现延时队列比较麻烦
+
+### 3. RocketMQ
