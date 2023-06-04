@@ -11,9 +11,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class KafkaTopicConfig {
 
+
+    //创建TopicName为topic.quick.initial的Topic并设置分区数为8以及副本数为1
     @Bean
     public NewTopic createTopic_kafka1(){
-        return new NewTopic("kafka1",4,(short) -1);
+        return new NewTopic("kafka1",8, (short) -1);
     }
 
     @Bean

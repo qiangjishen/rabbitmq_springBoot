@@ -52,7 +52,7 @@ public class KafkaConsumer {
             //int i = 1 / 0;
 
             // 打印出消息内容
-            System.out.println("消费："+record.topic()+"-"+record.partition()+"-"+record.value());
+            System.out.println("c1 消费："+record.topic()+"-"+record.partition()+"-"+record.value());
 
             //手动确认
             ack.acknowledge();
