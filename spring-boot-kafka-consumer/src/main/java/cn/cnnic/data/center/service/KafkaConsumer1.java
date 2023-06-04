@@ -6,12 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.TopicPartitionInfo;
-import org.apache.kafka.common.message.ConsumerProtocolAssignment;
 import org.springframework.kafka.annotation.*;
-
 import org.springframework.kafka.retrytopic.FixedDelayStrategy;
 import org.springframework.kafka.support.Acknowledgment;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.stereotype.Component;
 
