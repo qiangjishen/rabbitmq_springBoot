@@ -5,6 +5,32 @@ dubbo:
   application:
     name: dubbo-springboot-kafka-consumer
 spring:
+  main:
+    allow-circular-references: true
+  datasource:
+    password: thdc
+    url: jdbc:mysql://47.104.26.21:29005/ds_platform?serverTimezone=GMT%2B8&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&allowMultiQueries=true
+    username: thdc
+    flyway:
+      enabled: false
+
+    driverClassName: com.mysql.jdbc.Driver
+    filters: stat
+    initialSize: 1
+    maxActive: 20
+    maxOpenPreparedStatements: 20
+    maxWait: 60000
+    minEvictableIdleTimeMillis: 300000
+    minIdle: 1
+    numTestsPerEvictionRun: -1
+    poolPreparedStatements: true
+    testOnBorrow: true
+    testOnReturn: false
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 1000
+    type: com.alibaba.druid.pool.DruidDataSource
+    validationQuery: SELECT 1
+
   kafka:
     bootstrap-servers: 192.168.81.133:9092
     consumer:
@@ -49,7 +75,7 @@ spring:
       # 然后这批消息会被分配到另一个消费者中，还是会处理不完，这样这批消息就永远也处理不完。
       # 要避免出现上述问题，提前评估好处理一条消息最长需要多少时间，然后覆盖默认的max.poll.records参数
       # 注：需要开启BatchListener批量监听才会生效，如果不开启BatchListener则不会出现reBalance情况
-      max-poll-records: 3
+      max-poll-records: 2
       listener:
         # 在侦听器容器中运行的线程数，一般设置为 机器数*分区数
         concurrency: 4
@@ -71,3 +97,9 @@ spring:
         timeout:
           ms: 10000
 
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: cn.cnnic.data.center.domain
+  mapper-locations: classpath*:/mapper/*.xml

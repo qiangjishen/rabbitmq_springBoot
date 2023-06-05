@@ -111,12 +111,27 @@ public class KafkaConsumer1 {
     }
 
 
-    @KafkaListener(id = "demoContainer", topics = "topic.ppp", groupId = "mykafka99", idIsGroup = false, clientIdPrefix = "myClient1", concurrency = "${listen.concurrency:3}", containerFactory = "kafkaManualAckListenerContainerFactory")
-    public void listen(ConsumerRecord<String, String> record, Acknowledgment ack) {
+    @KafkaListener(id = "pppContainer", topicPartitions ={@TopicPartition(topic = "topic.ppp_1", partitions = {"0"}),}, groupId = "mykafka99", idIsGroup = false, clientIdPrefix = "myClient1", concurrency = "${listen.concurrency:2}", containerFactory = "kafkaManualAckListenerContainerFactory")
+    public void listen(ConsumerRecord<String, String> record, Acknowledgment ack) throws InterruptedException {
         System.out.println(record);
         System.out.println(record.value());
 
-        log.info("【接受到消息][线程ID:{} 消息内容：{}]", Thread.currentThread().getId(), record.value());
+        log.info("【分区：{}】【接受到消息][线程ID:{} 消息内容：{}]", record.partition(),Thread.currentThread().getId(), record.value());
+        Thread.sleep(1000L);
+        // 消息处理下游绑定事务，成功消费后提交ack
+        // 手动提交offset
+        ack.acknowledge();
+    }
+
+
+
+    @KafkaListener(id = "pppContainer2", topicPartitions ={@TopicPartition(topic = "topic.ppp_2", partitions = {"0,1"}),}, groupId = "mykafka99", idIsGroup = false, clientIdPrefix = "myClient1", concurrency = "${listen.concurrency:2}", containerFactory = "kafkaManualAckListenerContainerFactory")
+    public void listen80(ConsumerRecord<String, String> record, Acknowledgment ack) throws InterruptedException {
+        System.out.println(record);
+        System.out.println(record.value());
+
+        log.info("【分区：{}】【接受到消息][线程ID:{} 消息内容：{}]", record.partition(), Thread.currentThread().getId(), record.value());
+        Thread.sleep(1000L);
         // 消息处理下游绑定事务，成功消费后提交ack
         // 手动提交offset
         ack.acknowledge();
