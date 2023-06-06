@@ -2,8 +2,31 @@
 
 
 
-# 二、消费offset自己保存，手动拉取消费
+# 二、消费offset自己保存，手动拉取消费（我觉得实际应用中，手动消费更灵活、方便、可控）
 可以指定到消费具体某一主题topic的某个分区，也可以指定具体的offset消费，最大好处就是可以溯源。可以重复消费。
+
+    @KafkaListener(id = "consumer1",groupId = "my-group1",topicPartitions = {
+    @TopicPartition(topic = "topic1", partitions = { "0" }),
+    @TopicPartition(topic = "topic2", partitions = "2", partitionOffsets = @PartitionOffset(partition = "1", initialOffset = "100"))
+    })
+    public void listen1(String data) {
+       System.out.println(data);
+    }
+
+可以具体指定消费的发发数，是否手动提交等等
+
+     @KafkaListener(id = "demoContainer3", topics = "topic.cnnic.sdnsd", groupId = "mykafka3", idIsGroup = false, clientIdPrefix = "myClient1", concurrency = "${listen.concurrency:3}", containerFactory = "kafkaManualAckListenerContainerFactory", autoStartup = "false")
+    public void listen3(ConsumerRecord<String, String> record, Acknowledgment ack) {
+        System.out.println(record);
+        System.out.println(record.value());
+
+        log.info("【接受到消息][线程ID:{} 消息内容：{}]", Thread.currentThread().getId(), record.value());
+        // 消息处理下游绑定事务，成功消费后提交ack
+        // 手动提交offset
+        ack.acknowledge();
+    }
+
+手动保存offset具体见代码：ManualConsumController
 
 
 # 三、发送的时候事务，保证发送MQ跟保存MySql的原子性
