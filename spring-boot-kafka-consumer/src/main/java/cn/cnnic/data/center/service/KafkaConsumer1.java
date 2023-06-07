@@ -125,10 +125,16 @@ public class KafkaConsumer1 {
 
 
 
-    @KafkaListener(id = "pppContainer2", topicPartitions ={@TopicPartition(topic = "topic.ppp_2", partitions = {"0,1"}),}, groupId = "mykafka99", idIsGroup = false, clientIdPrefix = "myClient1", concurrency = "${listen.concurrency:2}", containerFactory = "kafkaManualAckListenerContainerFactory")
+    @KafkaListener(id = "pppContainer2", topicPartitions ={@TopicPartition(topic = "topic.ppp", partitions = {"0,1"}),}, groupId = "mykafka99", idIsGroup = false, clientIdPrefix = "myClient1", concurrency = "${listen.concurrency:2}", containerFactory = "kafkaManualAckListenerContainerFactory")
     public void listen80(ConsumerRecord<String, String> record, Acknowledgment ack) throws InterruptedException {
         System.out.println(record);
         System.out.println(record.value());
+        System.out.println("key: -->"+record.key());
+        System.out.println("key hash: -->"+Math.abs(record.key().hashCode()));
+        System.out.println("partition index: -->"+Math.abs(record.key().hashCode()) %8);
+
+        //Math.abs(key.hashCode()) % partitions.size()
+
 
         log.info("【分区：{}】【接受到消息][线程ID:{} 消息内容：{}]", record.partition(), Thread.currentThread().getId(), record.value());
         Thread.sleep(1000L);

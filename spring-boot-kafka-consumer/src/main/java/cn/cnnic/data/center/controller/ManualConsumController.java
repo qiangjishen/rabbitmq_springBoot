@@ -15,6 +15,7 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +26,10 @@ import java.util.*;
 /**
  * 手动摘取  ，
  * 提交offset
+ *
+ * 注意：实际业务场景的问题
+ *
+ * 应该是offset跟业务key（唯一），单独保存在一张表，定时去扫描状态没有置的数据，再次消费。
  */
 @RestController
 @RequestMapping("/manual")
@@ -95,7 +100,7 @@ public class ManualConsumController {
                 for (ConsumerRecord<String, String> record : records) {
                     //process record
                     System.out.println("处理数据::: 分区--->"+record.partition()+"    offset-->"+record.offset()+"  value:"+record.value());
-                    kafkaConsumer.commitSync();
+
                 }
                 long lastConsumedOffset = records.get(records.size() - 1).offset();
                 //保存位移
@@ -106,7 +111,13 @@ public class ManualConsumController {
     }
 
 
-    private  void storeOffsetToDB(TopicPartition tp, Long offset) {
+    /**
+     * 同一个事务中，保存offset 跟业务数据状态
+     * @param tp
+     * @param offset
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public  void storeOffsetToDB(TopicPartition tp, Long offset) {
         System.out.println("--保存:-------分区 ："+tp.partition()+"-----------OFFSET：：：:"+offset);
 
         OffsetDto odto = new OffsetDto();
@@ -123,6 +134,7 @@ public class ManualConsumController {
 
         offsetService.update(odto,orderDto);
 
+        kafkaConsumer.commitSync();
 
     }
 
@@ -178,6 +190,5 @@ public class ManualConsumController {
 
         return list;
     }
-
 
 }
