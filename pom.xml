@@ -18,6 +18,7 @@
         <module>spring-boot-kafka-consumer</module>
         <module>spring-boot-rabbitmq-provider</module>
         <module>spring-boot-rabbitmq-consumer</module>
+        <module>spring-boot-kafka-consumer2</module>
     </modules>
 
     <properties>
