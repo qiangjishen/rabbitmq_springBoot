@@ -2,6 +2,7 @@ package cn.cnnic.data.center.controller;
 
 
 import cn.cnnic.data.center.service.impl.KafkaSendResultHandler;
+import cn.cnnic.data.center.util.SnowFlake;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -187,17 +188,25 @@ public class KafkaController {
 
     @GetMapping("/send6/{msg}")
     public String send6(@PathVariable("msg") String msg) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("msg", msg);
 
+        for (int i = 0; i < 40; i++) {
+            long snowId = SnowFlake.getId();
+            //生成业务唯一key
+            String key =  "cnnic-sdnsd-"+snowId;
 
-        kafkaTemplate.executeInTransaction(operations -> {
-            kafkaTemplate.send("topic.hangge.demo_11", jsonObject.toJSONString());
-            kafkaTemplate.send("topic.ppp", jsonObject.toJSONString());
-           // throw new RuntimeException("fail");
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("msg", msg+" "+i);
 
-            return true;
-        });
+            kafkaTemplate.executeInTransaction(operations -> {
+               // kafkaTemplate.send("topic.hangge.demo_11", jsonObject.toJSONString());
+                kafkaTemplate.send("topic.ppp", key, jsonObject.toJSONString());
+               // throw new RuntimeException("fail");
+
+                //入库
+
+                return true;
+            });
+        }
 
       //  KeyedMessage
 

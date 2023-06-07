@@ -54,5 +54,10 @@ public class KafkaTopicConfig {
     public NewTopic createTopic_cnnic(){
         return new NewTopic("topic.cnnic.sdnsd",2,(short) -1);
     }
+
+    @Bean
+    public NewTopic createTopic_ppp(){
+        return new NewTopic("topic.ppp",2,(short) -1);
+    }
 }
 
