@@ -71,3 +71,5 @@ spring:
         linger.ms: 1
         # 对发送的数据进行压缩 支持压缩类型：none、gzip、snappy、lz4 和 zstd。
         #partitioner.class: cn.cnnic.data.center.util.CustomizePartitioner
+      #开启压缩
+      compression-type: snappy
