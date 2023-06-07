@@ -41,15 +41,12 @@ public class TspLogbookAnalysisService implements CommandLineRunner {
     }
 
 
-
     private void startConsume(int partitionIndex) {
         //创建kafka consumer
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(buildKafkaConfig());
 
         try {
-
             String topic = "topic.hangge.demo";
-
             //指定该consumer对应的消费分区
             TopicPartition partition = new TopicPartition(topic, partitionIndex);
             consumer.assign(Lists.newArrayList(partition));
@@ -59,7 +56,6 @@ public class TspLogbookAnalysisService implements CommandLineRunner {
                 Integer seekOffset = partitionOffsets.get(partitionIndex);
                 log.info("partition:{} , offset seek from {}", partition, seekOffset);
                 consumer.seek(partition, seekOffset);
-
             }
 
             //开始消费数据任务
