@@ -1,0 +1,23 @@
+server:
+  port: 9091
+#rocketmq配置信息
+rocketmq:
+  #nameservice服务器地址（多个以英文逗号隔开）
+  name-server: 127.0.0.1:9876
+  #生产者配置
+  producer:
+    #组名
+    group: cnnic-producer-group
+    send-message-timeout: 3000 # 消息发送超时时长，默认3s
+    retry-times-when-send-failed: 3 # 同步发送消息失败重试次数，默认2
+    retry-times-when-send-async-failed: 3 # 异步发送消息失败重试次数，默认2
+
+    #目的地（topic:tag）
+    #topic
+    topic: cnnic-topic
+    #sync tag(同步消息tag)
+    sync-tag: cnnic-sync-tags
+    #async tag(异步消息tag)
+    async-tag: cnnic-async-tags
+    #oneway tag(单向消息tag)
+    oneway-tag: cnnic-oneway-tags
